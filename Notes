@@ -1,0 +1,58 @@
+Aspects to Consider:
+    - Security 
+    - Scalibility
+    - Testability
+    - Resilience
+    - Performance 
+    - Sustaininbility  
+    - Maintainibility
+    - CI/CD
+    - Database to be used
+    - DR Strategy
+    - Identifies product stability
+    - Automation
+    - Progressive Rollouts and FMEA
+    - Cost optimization
+
+Samples of Software:
+    - https://quickbooks.intuit.com/time-tracking/#
+    - https://quickbooks.intuit.com/get-started/?variant=1b  
+
+
+Assumptions:
+    - Goals can be created in any order and will not be dependent on each other.
+    - Budgets can only be created for a specific goal meaning there is a parent child relationship between Goals and Budgets.
+
+************************
+    - Figure out if we should use a single db having organization as an attribute
+        or if we can have a separate instance for each organization
+************************
+
+
+Functional Requirements:
+    - Adming should be able to register the users.
+    - User should be able to login to system.
+    - User should be able to setup the goals in an UI Portal.
+    - User should be able to view the goals created by his hierarchy on an UI Portal.
+    - User should be able to setup one or more budgets. 
+    - User should associate a budget with only one goal.
+    - User should be able to import budgets from Google Spreadsheets, Excel or from JSON files.
+    - User should be able to setup the forecasts in an UI Portal.
+    - User should be able to share the budgets/forecasts with Accountant.
+    - Role based access should be present to provide edit/read access to the user.
+    - User should be able to set the reminder.
+    - User should be able to send the manual notifications.
+    - Notifications and reminders should be sent to user, accountant and supervisor as the budget & forecast model moves.
+
+Services Required:
+    - Goals Service
+    - Budget Service
+    - Notification Service
+    - OCR Service (Gateway which will house the logic to make calls to LLM Gateways)
+    - Reminder Service
+
+Things to prepare:
+    - HLD
+    - LLD
+    - APIs
+    - PseudoCode
