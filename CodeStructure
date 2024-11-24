@@ -1,0 +1,30 @@
+The code will be structured as a mono-repository having multiple modules. Each service here, will act as a separate module. Also, we will create some extra module which will house the code for interation with external services like Redis Cache, Kafka etc.
+
+Below are some of the services:
+    - Registration & Authorization Service (Auth-Service):
+        - Responsible for registering the users.
+        - Enable login of the users.
+        - Generating and Validating the JWT tokens.
+        
+    - Goals Service:
+        - Responsible for creating, reading, deleting and updating the goals.
+        - Responsible for approving the already created goals.
+
+    - Budget Service:
+        - Responsible for creating, reading, deleting and updating the budgets.
+        - Responsible for approving the already created budgets.
+    
+    - Notification Service:
+        - Connects with Kafka topic and delivers the notifications.
+        - Acts as a hub to send the notifications via different mediums.
+        - Interacts with DBs and fetches the required format of the message.
+    
+    - Reminder Service:
+        - Houses the code to create the personalized reminders.
+        - Has the scheduled job to send the reminders in timely manner.
+    
+    - Migration Services:
+        - Houses the code to read the scanned images.
+        - Houses the code to read excels.
+        - Connects with client APIs to fetch the data.
+        - Reads the files shared by customer and stores it into mybooks.
