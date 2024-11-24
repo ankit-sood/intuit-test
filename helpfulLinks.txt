@@ -1,0 +1,6 @@
+RBAC:
+    https://medium.com/@kamalmeet/designing-role-based-access-control-63c17a32894
+
+Authorization:
+    JWT: https://blog.tericcabrel.com/jwt-authentication-springboot-spring-security/
+    RBAC: https://blog.tericcabrel.com/role-base-access-control-spring-boot/
