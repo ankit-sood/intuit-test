@@ -30,7 +30,7 @@ Assumptions:
 
 
 Functional Requirements:
-    - Adming should be able to register the users.
+    - Admin should be able to register the users on demand and on bulk.
     - User should be able to login to system.
     - User should be able to setup the goals in an UI Portal.
     - User should be able to view the goals created by his hierarchy on an UI Portal.
@@ -45,14 +45,58 @@ Functional Requirements:
     - Notifications and reminders should be sent to user, accountant and supervisor as the budget & forecast model moves.
 
 Services Required:
+    - Auth Services
     - Goals Service
     - Budget Service
     - Notification Service
     - OCR Service (Gateway which will house the logic to make calls to LLM Gateways)
     - Reminder Service
 
+Common Jars/Codebases:
+    - Exception Handlers
+    - Common Filters
+
+Resiliance and Observability:
+    - Prometheus Integration.
+    - Graceful shutdowns.
+    - Properly Configuring Liveness and Readiness probes.
+    - Resiliancy patterns like Bulkhead, Circuit breaker, Rate Limiters.
+    - Configuring retries.
+    - Enable caching.
+    - Have client timeout higher than the server timeouts.
+
 Things to prepare:
     - HLD
     - LLD
     - APIs
     - PseudoCode
+
+There are following type of actors in the system:
+    - Creator       (Will be able to read, create, update and approve the goals and budgets)
+    - Approver      (Will be able to read, create, update and approve the goals and budgets)
+    - Admin         (Will have all the accesses but will not have backend access)
+    - Super Admin   (Will have all the accesses and can create anything from the backend)
+
+
+
+All this is done for a single organisation:
+Pre-requisite:
+    - Super-Admin creates admin.
+    - Admin creates the Creators and Approvers.
+    
+Goals Creation flow:
+    Creator Perspective:
+        - Creator logs in with his id.
+        - Creator creates the Goals.
+        - Notification is sent to the Approvers.
+        - Reminder service will check the main table and send the notifcation for approvals which are pending for long time.
+    
+    Approver Perspective:
+        - Approver recives the email to approve the goal.
+        - Appover logs in with his id.
+        - Approver sees multiple goals pending for his approval.
+        - Approver can select multiple goals or a single goal to approve.
+        - Approver can click on the goal to see all the details related to goal and he can edit the details associated to it.
+        - Approver approvers the goal.
+        - Notification is sent to the creator for approval.
+    
