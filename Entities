@@ -1,0 +1,67 @@
+User
+    - Id (PK)
+    - Name
+    - Email
+    - Password
+    - Contact
+
+Role
+    - Id (PK)
+    - Name
+    - Description
+    - CreatedAt
+
+Permission (Optional)
+    - Id (PK)
+    - Name
+    - Description
+
+    User-Role
+        - UserId (FK)
+        - RoleId (FK)
+
+    Goal
+        - Id (PK)
+        - CreatedBy (FK -> UserID)
+        - Name
+        - Description
+        - StartDate
+        - EndDate
+        - Status
+        - Priority
+        - CreatedAt
+        - UpdatedAt
+        - Version
+    
+    Goal_Log (Notification Service will query this)
+        - Id (PK)
+        - GoalID (FK)
+        - ApprovedBy (FK -> UserID)
+        - ApprovedAt 
+
+        Budget
+            - Id (PK)
+            - CreatedBy (FK -> UserID)
+            - GoalId (FK)
+            - Name
+            - Description
+            - Amount
+            - StartDate
+            - EndDate
+            - Status
+            - ApprovalCount
+            - CreatedAt
+            - UpdatedAt
+            - Version
+
+        Budget_Log (Notification Service will query this)
+            - Id (PK)
+            - BudgetId (FK)
+            - ApprovedBy (FK -> UserID)
+            - ApprovedAt
+
+Reminder
+
+Notification
+
+
