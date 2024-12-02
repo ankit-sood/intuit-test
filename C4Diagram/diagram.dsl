@@ -1,9 +1,9 @@
 workspace {
     model {
         # Actors
-        creator = person "Creator" "" "person"
-        approver = person "Approver" "" "person"
-        admin = person "Admin User" "" "person"
+        creator = person "Creator" "A user of the MyBooks, having access to Create/Update/Delete the Goals & Budgets."
+        approver = person "Approver" "A user of the MyBooks, having access to Create/Update/Delete/Approve the Goals & Budgets."
+        admin = person "Admin User" "A user of the MyBooks, having access to Create/Update/Delete/Approve the Goals & Budgets. It also has access to add new users."
 
         # External systems
         emailSystem = softwareSystem "Email System" "Mailgun" "external"
@@ -39,12 +39,22 @@ workspace {
                 remindersCrudComp = component "CRUD"
             }
             
-            authDbContainer = container "User-Database" "PostgreSQL" "" "database"
+            authDbContainer = container "User-Database" "PostgreSQL" "" "database" {
+                tags "Database"
+            }
             redisContainer = container "Redis Cache" "Redis" "" "cache"
-            reminderDbContainer = container "Reminder-Database" "PostgreSQL" "" "database"
-            goalsDbContainer = container "Goals-Database" "PostgreSQL" "" "database"
-            budgetDbContainer = container "Budgets-Database" "PostgreSQL" "" "database"
-            notificationsDbContainer = container "Notifications-Database" "PostgreSQL" "" "database"
+            reminderDbContainer = container "Reminder-Database" "PostgreSQL" "" "database" {
+                tags "Database"
+            }
+            goalsDbContainer = container "Goals-Database" "PostgreSQL" "" "database" {
+                tags "Database"
+            }
+            budgetDbContainer = container "Budgets-Database" "PostgreSQL" "" "database" {
+                tags "Database"
+            }
+            notificationsDbContainer = container "Notifications-Database" "PostgreSQL" "" "database" {
+                tags "Database"
+            }
             
             notificationsKafkaContainer = container "Notifications-Topic" "Kafka" "" "Messaging Queue"
             
@@ -89,5 +99,18 @@ workspace {
         authCrudComp -> authDbContainer "Reads from and writes to"
         webContainer -> authApiComp "Authenticates using"
         adminContainer -> authApiComp "Authenticates using"
+    }
+    
+    views {
+        styles {
+            element "Person" {
+                background #236CFF
+                color white
+                shape person
+            }
+            element "Database" {
+                shape cylinder
+            }
+        }
     }
 }
