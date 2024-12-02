@@ -6,7 +6,7 @@ workspace {
         admin = person "Admin User" "A user of the MyBooks, having access to Create/Update/Delete/Approve the Goals & Budgets. It also has access to add new users."
 
         # External systems
-        emailSystem = softwareSystem "Email System" "Mailgun" "external"
+        emailSystem = softwareSystem "Email System" "The internal Microsoft Exchange System" "internal"
         calendarSystem = softwareSystem "Calendar System" "Calendly" "external"
 
         # MyBooks System
@@ -64,11 +64,14 @@ workspace {
         }
 
         # Relationships (Actors & Systems)
-        creator -> webContainer "Manage Goals/Budgets"
-        approver -> webContainer "Manages tasks"
-        admin -> adminContainer "Manages users"
-        notificationsDbContainer -> emailSystem "Sends emails"
-        remindersApiContainer -> calendarSystem "Creates tasks in Calendar"
+        creator -> webContainer "Create/Update/Delete Goals & Budgets"
+        approver -> webContainer "Create/Update/Delete/Approved Goals & Budgets"
+        admin -> adminContainer "Manages Goals/Budgets & Creates new Users, "
+        notificationsDbContainer -> emailSystem "Sends emails using"
+        remindersApiContainer -> calendarSystem "Books the calendar using the meeting invite"
+        emailSystem -> approver "Notifications to approve the Goals & Budgets"
+        emailSystem -> creator "Notifications of Approval"
+        calendarSystem -> approver "Books the calendar using the meeting invite"
 
         # Relationships (Containers)
         webContainer -> authApiContainer "Uses"
