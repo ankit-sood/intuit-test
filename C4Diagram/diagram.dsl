@@ -15,6 +15,8 @@ workspace {
             adminContainer = container "Admin Web UI" "" "" "frontend"
             
             authApiContainer = container "Authentication API" "Java" {
+                signInApiComp = component "SignIn Controller" "Allows users to Sign-in to MyBooks System."
+                signUpApiComp = component "Registration Controller" "Allows admins to register new users to MyBooks System."
                 authApiComp = component "Authentication"
                 authCrudComp = component "CRUD"
             }
@@ -39,7 +41,7 @@ workspace {
                 remindersCrudComp = component "CRUD"
             }
             
-            authDbContainer = container "User-Database" "PostgreSQL" "" "database" {
+            authDbContainer = container "User-Database" "Stores User Registration information, hashed authentication credentials, access logs etc." "PostgreSQL" "database" {
                 tags "Database"
             }
             redisContainer = container "Redis Cache" "Redis" "" "cache"
@@ -100,7 +102,8 @@ workspace {
 
         # Relationships (Components & Containers)
         authCrudComp -> authDbContainer "Reads from and writes to"
-        webContainer -> authApiComp "Authenticates using"
+        webContainer -> signInApiComp "Make API calls to [JSON/HTTPS]"
+        adminContainer -> signUpApiComp "Make API calls to [JSON/HTTPS]"
         adminContainer -> authApiComp "Authenticates using"
     }
     
