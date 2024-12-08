@@ -22,6 +22,9 @@ Samples of Software:
 Assumptions:
     - Goals can be created in any order and will not be dependent on each other.
     - Budgets can only be created for a specific goal meaning there is a parent child relationship between Goals and Budgets.
+    - We have a pre-configured distributed logging system like Splunk, Open Observe, ELK etc.
+    - We have a pre-configured
+    - A common trace-id is generated when the user is successfully authenticated. This trace-id is used accross microservices to track the request. A span id is generated to track the trace with in a certain boundry.
 
 ************************
     - Figure out if we should use a single db having organization as an attribute
@@ -74,8 +77,8 @@ Things to prepare:
 There are following type of actors in the system:
     - Creator       (Will be able to read, create, update and approve the goals and budgets)
     - Approver      (Will be able to read, create, update and approve the goals and budgets)
-    - Admin         (Will have all the accesses but will not have backend access)
-    - Super Admin   (Will have all the accesses and can create anything from the backend)
+    - Admin         (Will have all the above accesses and the access to create the userA but will not have backend access)
+    - Super Admin   (Will have all the accesses and can create anything from the backend).
 
 
 
@@ -100,3 +103,4 @@ Goals Creation flow:
         - Approver approvers the goal.
         - Notification is sent to the creator for approval.
     
+
