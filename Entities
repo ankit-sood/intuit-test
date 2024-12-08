@@ -62,6 +62,12 @@ Permission (Optional)
 
 Reminder
 
-Notification
+Notifications_Master:
+    - ID (PK)
+    - Template 
+    - Type
+    - CommunicationMedium
+    - CreatedBy
+    - CratedAt
 
 
