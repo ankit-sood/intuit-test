@@ -1,0 +1,42 @@
+Authorization Service:
+    -   API to sign-up a new user.
+        
+        Request: 
+        HTTP POST /auth/sign-up 
+        {
+            "email": "foo@radar.com",
+            "password" : "foobar",
+            "fullName" : "Foo Bar",
+        }
+        Response:
+
+    
+    -   API for users to login.
+        Request:
+        HTTP POST /auth/login
+        {
+            "email": "foo@radar.com",
+            "password" : "foobar"
+        }
+        Response:
+
+    -   API to get all the registered users.
+        Request:
+        HTTP GET /users
+        Response:
+        
+
+    -   API to get the registered user by id.
+        Request:
+        HTTP GET /users/{id}
+        Response:
+
+    -   API to update the registered user by id.
+        Request:
+        HTTP PUT /users/{id}
+        Response:
+
+    -   API to delete the registered user by id. 
+        Request:
+        HTTP DELETE /users/{id} (Works with soft delete)
+    - HTTP POST /users/{id}/activate

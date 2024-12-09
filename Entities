@@ -4,6 +4,7 @@ User
     - Email
     - Password
     - Contact
+    - Status (Active, Deactivated, Locked)
 
 Role
     - Id (PK)

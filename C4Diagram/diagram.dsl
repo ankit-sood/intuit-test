@@ -1,4 +1,4 @@
-workspace {
+workspace "My-Books" "Business accounting product across the world."{
     model {
         # Actors
         creator = person "Creator" "A user of the MyBooks, having access to Create/Update/Delete the Goals & Budgets."
@@ -11,32 +11,35 @@ workspace {
 
         # MyBooks System
         MyBooksSystem  = softwareSystem "MyBooks System"{
-            webContainer = container "User Web UI" "" "" "frontend"
+            
+            webContainer = container "Web Application" "Delivers the static content and the MyBooks single page application." "Java & Spring MVC"
+            singlePageApplication = container "Single Page Application" "Provides all the MyBooks functionality to customers via Web Browser" "JavaScript & React" 
+            mobileApplication = container "Mobile App" "Provides all the MyBooks functionality to customers via Web Browser" "JavaScript & React" 
             adminContainer = container "Admin Web UI" "" "" "frontend"
             
-            authApiContainer = container "Authentication API" "Java" {
+            authApiContainer = container "Authentication API" "Responsible for Registering Users, Enable the login, Generate and Validate the JWT Token" "Java & Spring Boot" {
                 signInApiComp = component "SignIn Controller" "Allows users to Sign-in to MyBooks System."
                 signUpApiComp = component "Registration Controller" "Allows admins to register new users to MyBooks System."
                 authApiComp = component "Authentication"
                 authCrudComp = component "CRUD"
             }
-            goalsApiContainer = container "Goals API" "Java" {
+            goalsApiContainer = container "Goals API" "Responsible for Creating, Reading, Updating & Deleting Goals." "Java & Spring Boot" {
                 goalAuthComp = component "Authentication"
                 goalsCrudComp = component "CRUD"
             }
-            budgetApiContainer = container "Budgets API" "Java" {
+            budgetApiContainer = container "Budgets API" "Responsible for Creating, Reading, Updating & Deleting Budgets." "Java & Spring Boot" {
                 budgetAuthComp = component "Authentication"
                 budgetCrudComp = component "CRUD"
             }
-            notificationsApiContainer = container "Notifications API" "Java" {
+            notificationsApiContainer = container "Notifications API" "Responsible for Creating, Reading, Updating & Deleting Notifications Template. Fetches events from Notifications topic and have integration code to connect with apis to deliver notifications" "Java & Spring Boot" {
                 notificationsAuthComp = component "Authentication"
                 notificationsCrudComp = component "CRUD"
             }
-            migrationsApiContainer = container "Migrations API" "Java" {
+            migrationsApiContainer = container "Migrations API" "Responsbile for Creating, Reading, Updating & Deleting Migration Jobs. It also parses the file and saves the data for Goals and Budgets." "Java & Spring Boot" {
                 migrationsAuthComp = component "Authentication"
                 migrationsCrudComp = component "CRUD"
             }
-            remindersApiContainer = container "Reminders API" "Java" {
+            remindersApiContainer = container "Reminders API" "Java & Spring Boot" {
                 remindersAuthComp = component "Authentication"
                 remindersCrudComp = component "CRUD"
             }
@@ -60,8 +63,8 @@ workspace {
             
             notificationsKafkaContainer = container "Notifications-Topic" "Kafka" "" "Messaging Queue"
             
-            goalsCDCContainer = container "Goals Change Data Capture" "Java"
-            budgetsCDCContainer = container "Budgets Change Data Capture" "Java"
+            goalsCDCContainer = container "Goals Change Data Capture" "Listens to Inserts/Updates for Goals and pushes the events to notifications topic." "Java & Spring Boot"
+            budgetsCDCContainer = container "Budgets Change Data Capture" "Listens to Inserts/Updates for Budgets and pushes the events to notifications topic." "Java & Spring Boot"
                 
         }
 
@@ -76,19 +79,20 @@ workspace {
         calendarSystem -> approver "Books the calendar using the meeting invite"
 
         # Relationships (Containers)
-        webContainer -> authApiContainer "Uses"
-        webContainer -> goalsApiContainer "Uses"
-        webContainer -> budgetApiContainer "Uses"
-        webContainer -> notificationsApiContainer "Uses"
-        webContainer -> migrationsApiContainer "Uses"
-        webContainer -> remindersApiContainer "Uses"
+        webContainer -> singlePageApplication "Delivers to the customer's web browser"
+        singlePageApplication -> authApiContainer "Uses"
+        singlePageApplication -> goalsApiContainer "Uses"
+        singlePageApplication -> budgetApiContainer "Uses"
+        singlePageApplication -> notificationsApiContainer "Uses"
+        singlePageApplication -> migrationsApiContainer "Uses"
+        singlePageApplication -> remindersApiContainer "Uses"
         adminContainer -> authApiContainer "Uses"
         adminContainer -> goalsApiContainer "Uses"
         adminContainer -> budgetApiContainer "Uses"
         adminContainer -> notificationsApiContainer "Uses"
         adminContainer -> migrationsApiContainer "Uses"
         adminContainer -> remindersApiContainer "Uses"
-        authApiContainer -> authDbContainer "Persists data"
+        authApiContainer -> authDbContainer "Reads from and Writes to" "SQL/TCP"
         authApiContainer -> redisContainer "Fetches data and tokens"
         goalsApiContainer -> goalsDbContainer "Uses"
         budgetApiContainer -> budgetDbContainer "Uses"
@@ -110,7 +114,7 @@ workspace {
     views {
         styles {
             element "Person" {
-                background #236CFF
+                background #0373fc
                 color white
                 shape person
             }

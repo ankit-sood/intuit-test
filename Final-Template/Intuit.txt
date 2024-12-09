@@ -1,0 +1,104 @@
+Here’s a template you can use to present your solution for the craft assignment. The structure is designed to clearly communicate your approach, technical details, and results:
+
+Craft Assignment Presentation Template
+
+1. Introduction
+	•	Objective: The objective is to build an application that 
+					- Enables Users to set up budgets tied to specific financial goals.
+					- Enables Role based access to view or edit the goals.
+					- Enables Users to share the budgets tied to goals for approval.
+					- Sends reminders for approvals.
+					- Sends notifications for approvals or post approvals.
+
+	•	Overview: Briefly outline your approach to solving the problem.
+	•	Estimates:
+			Traffic: 
+				Total 3 Million Customers/day.
+				Active, 1 Miilion every 8 hours.
+				Read to Write Ratio is 10:1.
+				So, 10 Miilion reads 
+			    	 1 Million write 
+
+				Overall, 11 million ops every 8 hours. ~400 Ops/sec.
+
+			Storage:
+				Users table will take ~ 200 Bytes. So, 200 * 3 million = 600 MB
+				Roles & User-Role table will take ~ 100 Bytes. So, 100 * 12 million = 1.2 GB
+
+				Rest of the tables will also have similar storage requirements except Goals_log and Budget_log.
+				In those tables, the storage can go upwards of 5 times of user table i.e 3-4 GB.
+
+2. Solution Overview
+	•	Architecture Diagram: C4Diagram, Component Diagram, ERD.
+	•	Architecture Diagram: C4Diagram, Component Diagram, ERD.
+	
+	•	Technologies Used: 
+			- Java for backend development.
+			- Spring Boot for APIs and Dependency Injection.
+			- PostgreSQL for database (Flexible. Support for all the indexes like BTree, GIN etc. Supports JSON as well)
+			- Docker for containerization
+			- Kubernetes for management, deployment and scaling of containerized application.
+			- Service Registry for Mesh to Mesh Communication.
+			- Splunk for Distributed logging.
+			- Prometheus for Metrics Observability.
+			- Redis for caching.
+			- Kafka as a messaging queue.
+	
+
+3. Implementation Details
+	•	Backend:
+	•	Explanation of APIs or core business logic.
+	•	Include code snippets for critical parts.
+	•	Database Design:
+	•	Schema diagram or description of key tables.
+	•	Justify your design choices (e.g., normalization, indexing).
+	•	Integration and Workflow:
+	•	How the components interact (request-response cycle, third-party integrations, etc.).
+	•	Highlight any asynchronous workflows or batch processing.
+
+4. Challenges and Solutions
+	•	Discuss challenges you faced during implementation and how you resolved them.
+	•	Example: “Handling edge cases for overlapping budget periods required introducing a validation layer in the API.”
+
+5. Performance Considerations
+	•	Discuss any optimizations or scalability considerations you implemented.
+	•	Example: “Implemented caching using Redis to reduce database query load.”
+
+6. Testing Strategy
+	•	Unit Tests: Coverage of key functionalities.
+	•	Integration Tests: Ensuring all components work together seamlessly.
+	•	Manual Testing: Mention any user flows you tested manually.
+
+7. Trade-offs and Alternatives
+	•	Acknowledge any trade-offs in your solution and why you chose one approach over another.
+	•	Example: “I chose a document-based database like MongoDB for its flexibility in handling unstructured budget data, but acknowledged the lack of strict relational constraints compared to PostgreSQL.”
+
+8. Security Measures
+	•	Highlight how you ensured data security (e.g., encryption, validation).
+	•	Example: “Implemented input sanitization to prevent SQL injection and ensured sensitive data like user goals are encrypted at rest.”
+
+9. Monitoring and Maintenance
+	•	Discuss how you would handle logging, monitoring, and error tracking.
+	•	Example: “Integrated structured logging and set up alerts using tools like ELK Stack to monitor API performance and errors.”
+
+10. API Documentation or UX Mockups
+	•	Include a sample API documentation snippet (e.g., Swagger/OpenAPI format) or front-end mockups to demonstrate how developers/users would interact with your system.
+
+11. Scalability and Future Growth
+	•	Address how your solution can scale or be extended in the future.
+	•	Example: “The system is designed with a modular architecture, making it easy to add support for multiple currencies or regional tax regulations.”
+
+12. Demo (Optional)
+	•	Prepare a short live demo or a recorded walkthrough showcasing your solution.
+	•	Highlight key features and user workflows.
+
+13. Conclusion
+	•	Recap your solution.
+	•	Highlight its strengths (e.g., scalability, extensibility).
+	•	Mention potential future improvements or extensions.
+
+14. Q&A Preparation
+	•	Anticipate questions the interviewers might ask (e.g., trade-offs, alternative approaches).
+	•	Be ready to justify your design decisions and discuss edge cases.
+
+Let me know if you need further help with any specific section!
