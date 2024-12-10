@@ -1,7 +1,3 @@
-Here’s a template you can use to present your solution for the craft assignment. The structure is designed to clearly communicate your approach, technical details, and results:
-
-Craft Assignment Presentation Template
-
 1. Introduction
 	•	Objective: The objective is to build an application that 
 					- Enables Users to set up budgets tied to specific financial goals.
@@ -10,7 +6,6 @@ Craft Assignment Presentation Template
 					- Sends reminders for approvals.
 					- Sends notifications for approvals or post approvals.
 
-	•	Overview: Briefly outline your approach to solving the problem.
 	•	Estimates:
 			Traffic: 
 				Total 3 Million Customers/day.
@@ -28,8 +23,41 @@ Craft Assignment Presentation Template
 				Rest of the tables will also have similar storage requirements except Goals_log and Budget_log.
 				In those tables, the storage can go upwards of 5 times of user table i.e 3-4 GB.
 
+	•	Functional Requirements:
+    		- Admin should be able to register the users on demand and on bulk.
+    		- User should be able to login to system.
+    		- User should be able to reset the password.
+    		- Admin should be able to unlock the passoword.
+    		- User should be able to setup the goals in an UI Portal.
+    		- User should be able to view the goals.
+    		- User should be able to setup one or more budgets. 
+    		- User should associate a budget with only one goal.
+    		- User should be able to import budgets from Google Spreadsheets, Excel or from JSON files.
+    		- User should be able to setup the forecasts in an UI Portal.
+    		- User should be able to share the budgets/forecasts with Accountant.
+    		- Role based access should be present to provide edit/read access to the user.
+    		- User should be able to set the reminder.
+    		- User should be able to send the manual notifications.
+    		- Notifications and reminders should be sent to user, accountant and supervisor as the budget & forecast model moves.			
+	•	Non-Functional Requirements:
+			- All the apis except registration should be secure.
+			- All the apis should be scalable.
+			- Entire system should be resiliant.
+			- Entore system shoould be DR compliant and should be able to complete DR in 1 hour.
+			
 2. Solution Overview
-	•	Architecture Diagram: C4Diagram, Component Diagram, ERD.
+	•	Assumptions:
+    		- Goals can be created in any order and will not be dependent on each other.
+    		- All the design is done by keeping one organization in mind in case we need to use the same hardwares for all the organization, we can introduce an oraganization and use org id as foreign key with other tables.
+    		- Budgets can only be created for a specific goal meaning there is a parent child relationship between Goals and Budgets.
+    		- We have a pre-configured distributed logging system like Splunk, Open Observe, ELK etc.
+    		- We have a pre-configured observability system like prometheus.
+    		- A common trace-id is generated when the user is successfully authenticated. This trace-id is used accross microservices to track the request. A span id is generated to track the trace with in a certain boundry.
+    		- All the services will be having a load balancer in front.
+    		- All the communincations will be done with the help of service mesh.
+    		- All the resiliency patterns like circuit breaker, rate limiter, bulk head etc will be handled.
+    		- Chaos enginering can be introduced at a later point of time.
+
 	•	Architecture Diagram: C4Diagram, Component Diagram, ERD.
 	
 	•	Technologies Used: 

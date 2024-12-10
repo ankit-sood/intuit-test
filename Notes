@@ -21,6 +21,7 @@ Samples of Software:
 
 Assumptions:
     - Goals can be created in any order and will not be dependent on each other.
+    - All the design is done by keeping one organization in mind in case we need to use the same hardwares for all the organization, we can introduce an oraganization and use org id as foreign key with other tables.
     - Budgets can only be created for a specific goal meaning there is a parent child relationship between Goals and Budgets.
     - We have a pre-configured distributed logging system like Splunk, Open Observe, ELK etc.
     - We have a pre-configured observability system like prometheus.
